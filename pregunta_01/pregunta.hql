@@ -25,10 +25,9 @@ FIELDS TERMINATED BY '\t';
 
 LOAD DATA LOCAL INPATH 'data.tsv' OVERWRITE INTO TABLE data;
 
-INSERT OVERWRITE local directory 'output'
+INSERT OVERWRITE local directory './output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 
-
-SELECT  letras,COUNT(letras) FROM data GROUP BY letras;
+SELECT  letras,COUNT(*) FROM data GROUP BY letras;
 
 
