@@ -46,3 +46,12 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
+CREATE TABLE datos_0 AS SELECT c1, c2 key FROM tbl0;
+
+CREATE TABLE datos_1 AS SELECT c1, key, value FROM tbl1 LATERAL VIEW explode(c4) letra_numer;
+
+
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT d1.* FROM datos_0 d0, datos_1 d1
+WHERE d0.c1 = d1.c1 and d0.key = d1.key;
