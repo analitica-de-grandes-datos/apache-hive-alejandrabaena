@@ -44,3 +44,9 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
+
+CREATE TABLE valores_unicos AS SELECT explode(c5) AS letras FROM tbl0;
+
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM valores_unicos GROUP BY letras ORDER BY letras ASC;

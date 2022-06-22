@@ -45,3 +45,9 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
+CREATE TABLE cant_veces AS SELECT (YEAR(c4)) anio , letras FROM tbl0 LATERAL VIEW explode(c5) lista as letras;
+
+
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT anio , letras, count(1) cantidad FROM cant_veces GROUP BY anio, letras ORDER BY anio, letras ASC;

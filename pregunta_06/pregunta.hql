@@ -18,7 +18,7 @@ CREATE TABLE tbl0 (
     c2 STRING,
     c3 INT,
     c4 DATE,
-    c5 ARRAY<CHAR(1)>, 
+    c5 STRING, 
     c6 MAP<STRING, INT>
 )
 ROW FORMAT DELIMITED 
@@ -46,3 +46,6 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT UPPER(c5) AS letras FROM tbl0;
