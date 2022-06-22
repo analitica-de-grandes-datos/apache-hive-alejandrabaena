@@ -18,7 +18,7 @@ CREATE TABLE tbl0 (
     c2 STRING,
     c3 INT,
     c4 DATE,
-    c5 STRING>, 
+    c5 STRING, 
     c6 MAP<STRING, INT>
 )
 ROW FORMAT DELIMITED 

@@ -17,6 +17,7 @@ Escriba el resultado a la carpeta `output` de directorio de trabajo.
 */
 
 DROP TABLE IF EXISTS t0;
+DROP TABLE IF EXISTS datos;
 CREATE TABLE t0 (
     c1 STRING,
     c2 ARRAY<CHAR(1)>, 
@@ -32,8 +33,6 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
-
-DROP TABLE IF EXISTS datos;
 
 CREATE TABLE datos AS SELECT letra, key, value FROM (SELECT letra, c3 FROM t0 LATERAL VIEW explode(c2) t0 AS letra ) data_1
 LATERAL VIEW explode (c3) data_1;
