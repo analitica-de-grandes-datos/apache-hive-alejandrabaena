@@ -34,8 +34,7 @@ CREATE TABLE t0 (
         LINES TERMINATED BY '\n';
 LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 
-CREATE TABLE datos AS SELECT letra, key, value FROM (SELECT letra, c3 FROM t0 LATERAL VIEW explode(c2) t0 AS letra) data_1
-LATERAL VIEW explode (c3) data_1;
+CREATE TABLE datos AS SELECT letra, key, value FROM (SELECT letra, c3 FROM t0 LATERAL VIEW explode(c2) t0 AS letra) data_1 LATERAL VIEW explode (c3) data_1;
 
 INSERT OVERWRITE LOCAL DIRECTORY './output'
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
